@@ -1,0 +1,39 @@
+DROP TABLE IF EXISTS CLIENT_PERSONAL;
+DROP TABLE IF EXISTS CLIENT_FINANCIALS;
+
+CREATE TABLE CLIENT_PERSONAL
+(
+client_id INTEGER,
+name VARCHAR(30),
+gender VARCHAR(2),
+age INTEGER,
+city VARCHAR(30),
+length_at_residence INTEGER,
+education NUMERIC,
+PRIMARY KEY(client_id)
+);
+
+
+CREATE TABLE CLIENT_FINANCIALS
+(
+client_id INTEGER,
+income INTEGER,
+house_value INTEGER,
+employment_years INTEGER,
+employment_category INTEGER,
+credit_card_debt INTEGER,
+charitable_donations INTEGER,
+gold_membership INTEGER,
+FOREIGN KEY(client_id)
+	  REFERENCES CLIENT_PERSONAL(client_id)
+)
+
+
+/Users/abhishekkumarisrani/Desktop/Clients_Financial.csv
+////COPY moves data between PostgreSQL tables and standard file-system files.
+//COPY TO copies the contents of a table to a file, while COPY FROM copies data from a file to a table (appending the data to whatever is in the table already).
+//COPY TO can also copy the results of a SELECT query.
+
+
+SaskFundApp-# \COPY Client_Financial from '/Users/abhishekkumarisrani/Desktop/Clients_Financial.csv' DELIMITERS ',' CSV header
+SaskFundApp-# \COPY Client_Personal from '/Users/abhishekkumarisrani/Desktop/Clients_Personal.csv' DELIMITERS ',' CSV header  
